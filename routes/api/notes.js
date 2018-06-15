@@ -1,7 +1,7 @@
-//Router
+//=== router
 var router = require("express").Router();
 
-//controller
+//=== controller
 var noteController = require("../../controllers/note");
 
 router.get("/:id", noteController.find);

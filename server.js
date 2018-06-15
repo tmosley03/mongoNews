@@ -1,17 +1,16 @@
 // Dependencies
-var express = require("express");
-var mongoose = require('mongoose');
-var exphbs = require('express-handlebars');
-var bodyParser = require('body-parser');
+const express = require("express");
+const mongoose = require('mongoose');
+const exphbs = require('express-handlebars');
+const bodyParser = require('body-parser');
 // Require request and cheerio. This makes the scraping possible
-var cheerio = require("cheerio");
+const cheerio = require("cheerio");
 
 // Initialize Express
-var app = express();
-
+const app = express();
 
 //MLab connection
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://root:password1@ds139919.mlab.com:39919/mongo-news"
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://root:password1@ds139919.mlab.com:39919/mongo-news"
 
 mongoose.connect(MONGODB_URI, function () {
   console.log("Connected to Database")
@@ -20,22 +19,22 @@ mongoose.connect(MONGODB_URI, function () {
 //============================================
 
 // Set up our port to be either the host's designated port, or 3000
-var PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 // Instantiate our Express App
-var app = express();
+//let app = express();
 
-// Require our routes
-var routes = require("./routes");
+//=== Require routes
+const routes = require("./routes");
 
-// Designate our public folder as a static directory
+//=== tell the app where to find all of the assests
 app.use(express.static("public"));
 
-// Connect Handlebars to our Express app
+//=== handlebars
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// Use bodyParser in our app
+//=== bodyParser setup
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -49,5 +48,5 @@ app.use(routes);
 
 // Listen on port 3000
 app.listen(PORT, function() {
-  console.log("App running on port 3000!");
+  console.log("App running on port 3000");
 });
